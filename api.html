@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="hasil"></p>
+
+    <script>
+        var myHeaders = new Headers();
+        myHeaders.append("Host", "api.duniagames.co.id");
+        myHeaders.append("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0");
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        var gameId = '112492578';
+        var zoneId = '2558';
+        let payload = 'https://api.duniagames.co.id/api/transaction/v1/top-up/inquiry/store?productId=1&itemId=66&catalogId=121&paymentId=805&gameId=' + gameId + '&zoneId=' + zoneId + '&product_ref=CMS&product_ref_denom=AE';
+        let hasil = fetch(payload, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                return result.data.userNameGame;
+            })
+            .catch(error => console.log('error', error));
+        const printAddress = () => {
+            hasil.then((a) => {
+                console.log(a);
+                document.getElementById("hasil").innerHTML = a;
+            });
+        };
+        printAddress();
+        // var anjing = printAddress();
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
